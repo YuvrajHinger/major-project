@@ -1,0 +1,35 @@
+Login page
+
+Registration page
+
+				=> Candidate
+
+					1. Email	
+					2. password
+					3. *photo
+					4. *resume
+					5. name	First Last Middle
+					6. dob	dd mm yy
+					7. contact(add row)
+					8. address	permanent	current
+						city/village district state country
+					9. hsc	board	result	yop
+					10. ssc	board	result	yop
+					11. ug	university result yop
+					12. skills
+					13. Aadhar
+					14. prefer job location					
+
+				=> Company 
+
+					1. Email
+					2. password
+					3. name
+					4. site
+					5. about
+					6. Establishment Year
+					7. Company Sector
+					8. *Document Broucher
+					9. address	Headquarter	Branch(add row)						
+					10. GST nos
+
