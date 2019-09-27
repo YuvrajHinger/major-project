@@ -52,8 +52,7 @@ include("fetch_records.php")
 							<div class="four-text">
 								<h3>Candidate</h3>
 								<h4><?php echo number_format($students); ?></h4>
-							</div>
-							
+							</div>							
 						</div>
 					</div>
 					<div class="col-md-3 four-grid">

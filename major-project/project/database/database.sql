@@ -68,7 +68,7 @@ ALTER TABLE `answer`
 
 ALTER TABLE `candidate_login`
   ADD PRIMARY KEY (`candidate_id`),
-  ADD UNIQUE KEY `EMAIL` (`candidate_username`);
+  ADD UNIQUE KEY `candidate_username` (`candidate_username`);
 
 ALTER TABLE `exam`
   ADD PRIMARY KEY (`exam_id`),

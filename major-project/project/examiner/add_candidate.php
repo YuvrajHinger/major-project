@@ -47,16 +47,16 @@
               			        </div> 
                             <?php  } ?>
                             <form action="" method="post">
-                                <div class="col-md-12 form-group2 group-mail">
+                                <div class="col-md-12 form-group1 group-mail">
                                     <label class="control-label"> Candidate Username</label>
                                     <input type="text" name="candidate_username" class="form-control" placeholder="Username..." required>
                                 </div>
-                                <div class="clearfix"> </div>
-                                <div class="col-md-12 form-group1 group-mail">                                                        
+                                <div class="clearfix"> </div>                                                                
+                                <div class="col-md-12 form-group1 group-mail">
                                     <label class="control-label"> Candidate Password</label>
                                     <input type="password" name="candidate_password" class="form-control" placeholder="Password..." required>
                                 </div>
-                                <div class="clearfix"> </div>                                
+                                <div class="clearfix"> </div>                                                                
                                 <div class="col-md-12 form-group">
                                     <button type="submit" class="btn btn-primary" name="candidate_submit" >Submit</button>
                                     <button type="reset" class="btn btn-default" value="reset">Reset</button>

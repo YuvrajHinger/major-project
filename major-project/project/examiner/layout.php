@@ -80,7 +80,7 @@
                         </a>
                     </li>																		 
 					<li>
-                        <a href="results.php">
+                        <a onclick="alert('working soon')">
                             <i class="fa fa-asterisk"></i>  
                             <span>Exam Results</span>
                             <div class="clearfix"></div>
