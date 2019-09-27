@@ -1,7 +1,7 @@
 <?php
 session_start();
-session_destroy();
-session_unset();
+unset($_SESSION['examiner_id']);
+unset($_SESSION['examiner_username']);
 ob_start();
 header("location:login.php");
 ob_flush();

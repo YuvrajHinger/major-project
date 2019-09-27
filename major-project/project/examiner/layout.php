@@ -34,7 +34,7 @@
                         </a>
                     </li>																		 
                     <li id="menu-academico" >
-                        <a href="#">
+                        <a>
                             <i class="fa fa-user" aria-hidden="true"></i>
                             <span> Candidate</span> 
                             <span class="fa fa-angle-right" style="float: right"></span>
@@ -42,15 +42,15 @@
                         </a>
 						<ul id="menu-academico-sub" >										   
                             <li id="menu-academico-avaliacoes" >
-                                <a href="addstudent.php">Add Candidate</a>
+                                <a href="add_candidate.php">Add Candidate</a>
                             </li>
                             <li id="menu-academico-avaliacoes" >
-                                <a href="studentlist.php"> List Of Candidate</a>
+                                <a href="list_candidate.php"> List Of Candidate</a>
                             </li>
                         </ul>
                     </li>										 
                     <li id="menu-academico" >
-                        <a href="#">
+                        <a>
                             <i class="fa fa-th-list" aria-hidden="true"></i>
                             <span> Examination</span> 
                             <span class="fa fa-angle-right" style="float: right"></span>
@@ -66,12 +66,19 @@
 						</ul>
 					</li>										 
 				    <li>
-                        <a href="addquestion.php">
+                        <a href="add_question.php">
                             <i class="fa fa-question"></i>  
                             <span>Add Question</span>
                             <div class="clearfix"></div>
                         </a>
                     </li>																         
+                    <li>
+                        <a href="exam_post.php">
+                            <i class="fa fa-tachometer"></i> 
+                            <span>Post Exam</span>
+                            <div class="clearfix"></div>
+                        </a>
+                    </li>																		 
 					<li>
                         <a href="results.php">
                             <i class="fa fa-asterisk"></i>  

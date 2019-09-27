@@ -32,14 +32,14 @@
                         </a>
                     </li>																		                     
                     <li id="menu-academico" >
-                        <a href="">
+                        <a onclick="alert('working soon')">
                             <i class="fa fa-th-list" aria-hidden="true"></i>
                             <span> Examination</span>                             
                             <div class="clearfix"></div>
                         </a>					    
 					</li>										 				    
 					<li>
-                        <a href="results.php">
+                        <a onclick="alert('working soon')">
                             <i class="fa fa-asterisk"></i>  
                             <span>Exam Results</span>
                             <div class="clearfix"></div>

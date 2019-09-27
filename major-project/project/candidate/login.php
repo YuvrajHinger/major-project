@@ -3,7 +3,7 @@
 	require_once 'database.php';    
 	require_once 'layout.php';	
 	$flag=0;
-	if(isset($_SESSION['examiner_id'])) header("Location: index.php");	    
+	if(isset($_SESSION['candidate_id'])) header("Location: index.php");	    
 	if(isset($_POST['login'])){				
 		$username=$_POST['username'];
 		$password=$_POST['password'];
