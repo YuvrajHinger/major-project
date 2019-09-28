@@ -6,6 +6,9 @@
             addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); 
             function hideURLbar(){ window.scrollTo(0,1); } 
         </script>
+        <link rel="stylesheet" type="text/css" href="select2/bootstrap-select.min.css"/>
+	    <link rel="stylesheet" type="text/css" href="select2/select2.css"/>
+	    <link rel="stylesheet" type="text/css" href="select2/multi-select.css"/>
 		<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
         <link rel="stylesheet" href="css/jquery-ui.css"> 
 		<link href="css/style.css" rel='stylesheet' type='text/css' />
@@ -73,11 +76,20 @@
                         </a>
                     </li>																         
                     <li>
-                        <a href="exam_post.php">
+                        <a>
                             <i class="fa fa-tachometer"></i> 
                             <span>Post Exam</span>
+                            <span class="fa fa-angle-right" style="float: right"></span>
                             <div class="clearfix"></div>
                         </a>
+                        <ul id="menu-academico-sub" >										   
+							<li id="menu-academico-avaliacoes" >
+                                <a href="exam_post.php" onclick = "getConfirm(this.href);"> Post Exam</a>
+                            </li>
+							<li id="menu-academico-avaliacoes" >
+                                <a href="list_post_exam.php"> List Of Exams</a>
+                            </li>
+						</ul>
                     </li>																		 
 					<li>
                         <a onclick="alert('working soon')">
@@ -100,6 +112,10 @@
     }
     function script(){  ?>
         <script>
+            $(function () {
+                $(".select2").select2();		
+                $('.select2-input').addClass('form-control');
+            });
             window.onload = function() {
 		        history.replaceState("", "", "");
 	        }   	
@@ -118,6 +134,9 @@
                 toggle = !toggle;
             }              		                     
         </script>    
+        <script type="text/javascript" src="select2/bootstrap-select.min.js"></script>
+        <script type="text/javascript" src="select2/select2.min.js"></script>
+        <script type="text/javascript" src="select2/jquery.multi-select.js"></script>
         <script src="js/scripts.js"></script>
         <script src="js/bootstrap.min.js"></script>  <?php
     }   

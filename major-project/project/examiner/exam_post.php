@@ -4,9 +4,22 @@
     require_once 'database.php';
     require_once 'layout.php';            
     $step=0;
+    $flag=0;
     if(isset($_POST['exam_submit'])){
         $step=1;
         $exam_id=$_POST['exam_title'];
+    }
+    if(isset($_POST['question_submit'])){
+        $qid=$_POST['exam_question'];        
+        $question_arr='';
+        foreach($qid as $key=>$value){            
+            $question_arr=$question_arr.'id'.$value;
+        }        
+        $str=explode('id',$question_arr);                
+        $alloted_date=date("Y/m/d");        
+        $query="INSERT INTO exam_posting(question_id,alloted_date) VALUES('$question_arr','$alloted_date')";
+        if($con->query($query)) $flag=1;        
+        else $flag=-1;        
     }
 ?>
 <html>
@@ -26,6 +39,18 @@
 		            </ol>                    
                     <div class="validation-system"> 		                        
  		                <div class="validation-form">                            
+                         <?php if($flag==1){ ?>
+                                <div class="alert alert-success alert-dismissible">                  			
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <i class="icon fa fa-angle-right"></i> SuccessFully Post Exam.
+                                </div> 
+                            <?php  }
+                            else if($flag==-1){ ?>
+                                <div class="alert alert-danger alert-dismissible">                  			
+							        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  			        <i class="icon fa fa-ban"></i> Problem Inserting Data.
+              			        </div> 
+                            <?php  } ?>
                          <?php if($step==0) {?>
                             <form action="" method="post">
                                 <div class="col-md-12 form-group2 group-mail">
@@ -45,22 +70,15 @@
                         else if($step==1) { ?>
                             <form action="" method="post">
                                 <div class="col-md-12 form-group2 group-mail">
-                                    <table class="table table-bordered table-hover" id="option_ans">
-                                        <tr id="option_content">
-                                            <td>
-                                                <label class="control-label">Select Question</label>
-                                                <select class="form-control" name="exam_title" required>                                    
-                                                    <option value="">Select any Question</option>  <?php $result = $con->query("SELECT * FROM question where status='0' && exam_id='$exam_id'"); while($row=$result->fetch_assoc()) {?>
-                                                    <option value="<?php echo $row['question_id'] ?>"><?php echo $row['question_text']; ?></option>  <?php } ?>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                    <label class="control-label">Select Question</label>
+                                    <select class="form-control select2" name="exam_question[]" multiple required>                                    
+                                        <?php $result = $con->query("SELECT * FROM question where status='0' && exam_id='$exam_id'"); while($row=$result->fetch_assoc()) {?>
+                                        <option value="<?php echo $row['question_id'] ?>"><?php echo $row['question_text']; ?></option>  <?php } ?>
+                                    </select>                                    
                                 </div>
                                 <div class="clearfix"> </div>
-                                <div class="col-md-12 form-group">                                    
-                                    <button type="button" class="btn btn-danger" onclick="add_option('option_ans','option_content')">Add Question</button>
-                                    <button type="button" class="btn btn-primary" onclick="alert('working soon')" name="question_submit">Save & Next</button>                                    
+                                <div class="col-md-12 form-group">                                                                        
+                                    <button type="submit" class="btn btn-primary" name="question_submit">Save & Next</button>                                    
                                     <a class="btn btn-default" href="">Previous</a>                                    
                                 </div>		
                                 <div class="clearfix"> </div>
@@ -69,22 +87,7 @@
                         </div>
                     </div>                    
                 </div>
-            </div>
-            <script>
-            function add_option(tableId,cellId){        
-                var table = document.getElementById(tableId);        
-                var row = table.insertRow();        
-                cellId = document.getElementById(cellId);
-                row.innerHTML = cellId.innerHTML;
-                var cell = row.insertCell();
-                cell.innerHTML = '<a class="btn btn-danger" onclick="delete_option(\''+tableId+'\',this)">Delete Question</a>';
-            }
-            function delete_option(tableId,i){          
-                i = i.parentNode.parentNode.rowIndex;      
-                var table = document.getElementById(tableId);
-                table.deleteRow(i);
-            }          
-            </script>
+            </div>            
             <?php script(); ?>
             <?php sidebar(); ?>
         </div>        
