@@ -42,7 +42,7 @@
                             <select name="by_candidate" class="form-control select2">
                                 <option value="">Search By Name</option>
                                 <?php
-                                    $getData=$con->query($query);		                
+                                    $getData=$con->query("select * from candidate_login where status='0'");		                
                                     while($fetchData=$getData->fetch_assoc()){
                                         $candidate_username= $fetchData['candidate_username'];                      
                                         echo "<option>".$candidate_username."</option>";
