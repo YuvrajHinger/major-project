@@ -77,29 +77,3 @@
         </div>        
     </body>
 </html>
-
-
-<!-- CREATE TABLE `answer` (
-  `answer_id` int(11) NOT NULL,
-  `answer_text` varchar(200) NOT NULL,
-  `question_id` int(11) NOT NULL,
-  `exam_id` int(11) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-INSERT INTO `answer` (`answer_id`, `answer_text`, `question_id`, `exam_id`, `status`) VALUES
-(1, 'Hyper Text Markup Language', 1, 1, 0),
-(2, 'High Text Markup Language', 1, 1, 0),
-(3, 'Hyper Text Make Language', 1, 1, 0),
-(4, 'High-Level Textual Markup Language', 1, 1, 0),
-(5, 'Javascript', 2, 1, 0),
-(6, 'JavaStyle', 2, 1, 0),
-(7, 'JavaSide', 2, 1, 0),
-(8, 'cascading style sheet', 3, 1, 0),
-(9, 'cascade style show', 3, 1, 0),
-(10, 'casecade style sheet', 3, 1, 0),
-(11, 'cascading style show', 3, 1, 0);
-ALTER TABLE `answer`
-  ADD PRIMARY KEY (`answer_id`);
-ALTER TABLE `answer`
-  MODIFY `answer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12; -->
