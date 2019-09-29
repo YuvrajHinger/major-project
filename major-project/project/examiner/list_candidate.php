@@ -51,8 +51,8 @@
         </select>
     </div>
     <div class="col-md-3">
-        <button style="background-color:#1b93e1; type="submit" name="search" class="btn btn-success">FILTER</button>
-        <button style="background-color:red; type="submit" name="reset" class="btn btn-success">Reset</button>
+        <button  type="submit" name="search" class="btn btn-primary">FILTER</button>
+        <button style="background-color:red;" type="submit" name="reset" class="btn btn-success">Reset</button>
     </div>
 </div>
 </form>        
