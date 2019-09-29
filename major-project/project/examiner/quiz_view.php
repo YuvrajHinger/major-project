@@ -14,10 +14,6 @@
         height :15px;
         width : 15px;
     }
-    .que
-    {
-        border-size:5px;
-    }
     </style>
     <body>
         <div class="page-container">
