@@ -22,10 +22,10 @@
                     <?php
     if(isset($_POST['search'])){        
         $candidate_username= $_POST['by_candidate'];                  
-        $query = "select * from `candidate_login` where `is_deleted` = '0' and (name='$candidate_username')";                
+        $query = "select * from `candidate_login` where `status` = '0' and (name='$candidate_username')";                
     }
     else{
-        $query = "select * from `candidate_login` where `is_deleted` = '0'";
+        $query = "select * from `candidate_login` where `status` = '0'";
     }
     if(isset($_POST['deleteAction']))
     {
@@ -42,7 +42,7 @@
         <select name="by_company" class="form-control select2">
             <option value="">Search By Name</option>
             <?php
-                $getData=mysql_query("select distinct name from `candidate_username` where `is_deleted` = '0'");		                
+                $getData=mysql_query("select distinct candidate_username from candiate_login where status = '0'");		                
                 while($fetchData=mysql_fetch_array($getData)){
                     $candidate_username= $fetchData['name'];                      
                     echo "<option>".$candidate_username."</option>";
@@ -60,7 +60,7 @@
                         <div class="agile-tables">
                             <div class="w3l-table-info">
                                 <h2>List of Candidate</h2>
-                                <table width="100%" id="table" class="table table-bordered table-hover">
+                                <table  id="table" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th style="background-color:#1b93e1;color:white;">#</th>

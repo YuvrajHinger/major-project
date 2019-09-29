@@ -3,24 +3,44 @@
     if(empty($_SESSION['examiner_id'])) header("Location: login.php");
     require_once 'database.php';
     require_once 'layout.php';    
+    include 'excel_reader.php';
+    $excel = new PhpExcelReader;    
     $flag=0;
-    if(isset($_POST['question_submit'])){				
+    if(isset($_POST['excel_submit'])){				
         $exam_id=$_POST['exam_title'];
-        $question=$_POST['question'];
-        $answer=$_POST['answer'];       
-        $query="INSERT INTO answer(answer_text,exam_id) VALUES ('$answer','$exam_id')";
-        if($con->query($query)==TRUE){
-            $answer_id=$con->insert_id;
-            $query="INSERT INTO question(question_text,answer_id,exam_id) VALUES ('$question','$answer_id','$exam_id')";        
-            $con->query($query);		
-            $option=$_POST['option'];
-            foreach($option as $key=>$value){            
-                $query="INSERT INTO answer(answer_text,exam_id) VALUES ('$value','$exam_id')";
-                $con->query($query);		
-            }             
-            $flag=1;                        
-        }                        
-        else $flag=-1;
+        $excel_file=$_FILES['excel_file']['name'];
+        $excel->read($excel_file); 
+        $n=count($excel->sheets);    
+        $sheets=$excel->sheets[0];
+        $q_id=0;
+        $a_id=0;
+        $row=2; 
+        while($row<=$sheets['numRows']){
+            $col=1;
+            while($col<=$sheets['numCols']){
+                if(isset($sheets['cells'][$row][$col])){
+                    $data=$sheets['cells'][$row][$col];
+                    if($col==1){
+                        $query="INSERT INTO question(question_text,answer_id,exam_id) VALUES('$data','$a_id','$exam_id')";
+                        $con->query($query);
+                        $q_id=$con->insert_id;
+                    }                                
+                    else if($col==2){
+                        $query="INSERT INTO answer(answer_text,question_id,exam_id) VALUES('$data','$q_id','$exam_id')";
+                        $con->query($query);
+                        $a_id=$con->insert_id;
+                        $query="UPDATE question SET answer_id='$a_id' WHERE question_id=$q_id";        
+                        $con->query($query);
+                    }
+                    else{
+                        $query="INSERT INTO answer(answer_text,question_id,exam_id) VALUES('$data','$q_id','$exam_id')";
+                        $con->query($query);
+                    }
+                }                
+                $col++;
+            }         
+            $row++;
+        }   $flag=1;     
 	}	
 ?>
 <html>
@@ -40,24 +60,8 @@
                             </li>                            
                         </center>
 		            </ol>
-                    <div class="validation-system"> 
+                    <div class="validation-system">                     
                         <div id="step1" class="validation-form">		                        
-                            <ol class="bg-danger">                                                
-                                <br>
-			                    <center>
-                                    <h4>Guideline to Upload Excel File</h4>
-                                </center>
-                                <br>
-                            </ol>
-                            <ol class="bg-light">                                                
-                                <br>
-			                    <center>
-                                    <img class="img-responsive mx-auto d-block" src="image/quiz_upload.png"/>
-                                </center>
-                                <br>
-                            </ol>
-                        </div>
- 		                <div id="stpe2" class="validation-form" style="display:none">
                             <?php if($flag==1){ ?>
                                 <div class="alert alert-success alert-dismissible">                  			
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -70,7 +74,16 @@
                   			        <i class="icon fa fa-ban"></i> Problem Inserting Data.
               			        </div> 
                             <?php  } ?>
-                            <form action="" method="post">
+                            <center>
+                                <h3>Guideline to Upload Excel File</h3><hr>
+                                <img class="img-responsive mx-auto d-block" style="border-radius: 10px; border: solid blue; padding: 2%" src="image/quiz_upload.png" alt="Guideline For Upload"/><hr>
+                                <h4 class="caption text-dark">File Format: filename.xls</h4><hr>
+                                <h4 class="caption text-danger">Your Excel File Must Be in This Given Format. |</h4><hr>
+                                <button onclick="changeView('step1','step2')" class="btn btn-primary">Proceed</button>
+                            </center>                                                                                                                                                                                                                                   
+                        </div>
+ 		                <div id="step2" class="validation-form" style="display:none">                            
+                            <form action="" method="post" enctype="multipart/form-data">
                                 <div class="col-md-12 form-group2 group-mail">
                                     <label class="control-label"> Exam Title</label>
                                     <select class="form-control" name="exam_title" required>                                    
@@ -81,12 +94,13 @@
                                 <div class="clearfix"> </div>
                                 <div class="col-md-12 form-group1 group-mail">                                                        
                                     <label class="control-label"> Upload Excel File</label>
-                                    <input type="file" class="form-control"/>
+                                    <input name="excel_file" type="file" class="form-control" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>
                                 </div>
                                 <div class="clearfix"> </div>                                
-                                <div class="col-md-12 form-group">                                    
-                                    <button type="submit" class="btn btn-primary" name="question_submit">Submit</button>
+                                <div class="col-md-12 form-group">                                                                        
+                                    <button type="submit" class="btn btn-primary" name="excel_submit">Submit</button>
                                     <button type="reset" class="btn btn-default" value="reset">Reset</button>
+                                    <button onclick="changeView('step2','step1')" class="btn btn-primary float-right">View Guide-line</button>
                                 </div>		
                                 <div class="clearfix"> </div>
                             </form>
@@ -96,6 +110,12 @@
             </div>            
             <?php script(); ?>
             <?php sidebar(); ?>
+            <script>
+            function changeView(h,s){
+                document.getElementById(h).style.display='none';
+                document.getElementById(s).style.display='block';
+            }
+            </script>
         </div>        
     </body>
 </html>

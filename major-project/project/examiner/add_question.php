@@ -34,14 +34,13 @@
                     <ol class="breadcrumb">                                                
 			            <center>
                             <li class="breadcrumb-item">
-                                <h4>
+                                <h4 class="clearfix">
                                     <a href="add_Question_ByExcel.php" class="float-right btn btn-warning">
-                                        <i class="fa fa-file-excel-o"></i> Excel
-                                    </a>
-                                    <a href="">Add Question</a>                                    
+                                        <i class="fa fa-file-excel-o"> Excel</i>                                        
+                                    </a>                                    
+                                    <a>Add Question</a>                                                                        
                                 </h4>
-                            </li>
-                            <li><br></li>
+                            </li>                            
                         </center>
 		            </ol>
                     <div class="validation-system"> 		                        

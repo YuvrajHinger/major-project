@@ -28,7 +28,12 @@
                     <ol class="breadcrumb">
 			            <center>
                             <li class="breadcrumb-item">
-                                <h4><a href="">Add Candidate</a></h4>
+                                <h4 class="clearfix">
+                                    <a href="add_candidate_ByExcel.php" class="float-right btn btn-warning">
+                                        <i class="fa fa-file-excel-o"> Excel</i>                                        
+                                    </a>                                    
+                                    <a>Add Candidate</a>                                                                        
+                                </h4>                                
                             </li>
                         </center>
 		            </ol>
