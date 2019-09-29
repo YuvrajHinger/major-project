@@ -34,18 +34,30 @@
                     <ol class="breadcrumb">                                                
 			            <center>
                             <li class="breadcrumb-item">
-                                <h4>
-                                    <a href="add_Question_ByExcel.php" class="float-right btn btn-warning">
-                                        <i class="fa fa-file-excel-o"></i> Excel
-                                    </a>
+                                <h4>                                    
                                     <a href="">Add Question</a>                                    
                                 </h4>
-                            </li>
-                            <li><br></li>
+                            </li>                            
                         </center>
 		            </ol>
-                    <div class="validation-system"> 		                        
- 		                <div class="validation-form">
+                    <div class="validation-system"> 
+                        <div id="step1" class="validation-form">		                        
+                            <ol class="bg-danger">                                                
+                                <br>
+			                    <center>
+                                    <h4>Guideline to Upload Excel File</h4>
+                                </center>
+                                <br>
+                            </ol>
+                            <ol class="bg-light">                                                
+                                <br>
+			                    <center>
+                                    <img class="img-responsive mx-auto d-block" src="image/quiz_upload.png"/>
+                                </center>
+                                <br>
+                            </ol>
+                        </div>
+ 		                <div id="stpe2" class="validation-form" style="display:none">
                             <?php if($flag==1){ ?>
                                 <div class="alert alert-success alert-dismissible">                  			
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -68,28 +80,11 @@
                                 </div>
                                 <div class="clearfix"> </div>
                                 <div class="col-md-12 form-group1 group-mail">                                                        
-                                    <label class="control-label"> Question ?</label>
-                                    <textarea class="form-control" rows="2"  name="question" required></textarea>
+                                    <label class="control-label"> Upload Excel File</label>
+                                    <input type="file" class="form-control"/>
                                 </div>
-                                <div class="clearfix"> </div>
-                                <div class="col-md-12 form-group1 group-mail">                                                        
-                                    <label class="control-label"> Answer</label>
-                                    <textarea class="form-control" rows="3" name="answer" required></textarea>
-                                </div>
-                                <div class="clearfix"> </div>
-                                <div class="col-md-12 form-group1 group-mail">                                                                                            
-                                    <table class="table table-bordered table-hover" id="option_ans">
-                                        <tr id="option_content">
-                                            <td>
-                                                <label class="control-label">Option</label>                                
-                                                <textarea class="form-control" rows="3" name="option[]" required></textarea>                                                
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>                                                                
-                                <div class="clearfix"> </div>
-                                <div class="col-md-12 form-group">
-                                    <button type="button" class="btn btn-danger" onclick="add_option('option_ans','option_content')">Add Option</button>
+                                <div class="clearfix"> </div>                                
+                                <div class="col-md-12 form-group">                                    
                                     <button type="submit" class="btn btn-primary" name="question_submit">Submit</button>
                                     <button type="reset" class="btn btn-default" value="reset">Reset</button>
                                 </div>		
@@ -98,22 +93,7 @@
                         </div>
                     </div>                    
                 </div>
-            </div>
-            <script>
-            function add_option(tableId,cellId){        
-                var table = document.getElementById(tableId);        
-                var row = table.insertRow();        
-                cellId = document.getElementById(cellId);
-                row.innerHTML = cellId.innerHTML;
-                var cell = row.insertCell();
-                cell.innerHTML = '<a class="btn btn-danger" onclick="delete_option(\''+tableId+'\',this)">Delete Option</a>';
-            }
-            function delete_option(tableId,i){          
-                i = i.parentNode.parentNode.rowIndex;      
-                var table = document.getElementById(tableId);
-                table.deleteRow(i);
-            }          
-            </script>
+            </div>            
             <?php script(); ?>
             <?php sidebar(); ?>
         </div>        
