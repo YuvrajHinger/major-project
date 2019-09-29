@@ -1,3 +1,19 @@
+DROP TABLE `category`;
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL,
+  `title` varchar(200) NOT NULL,  
+  `examiner_id` int(11) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `title` (`title`);
+
+ALTER TABLE `category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+
 CREATE TABLE `answer` (
   `answer_id` int(11) NOT NULL,
   `answer_text` varchar(200) NOT NULL,

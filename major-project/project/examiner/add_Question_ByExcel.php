@@ -7,7 +7,7 @@
     $excel = new PhpExcelReader;    
     $flag=0;
     if(isset($_POST['excel_submit'])){				
-        $exam_id=$_POST['exam_title'];
+        $id=$_POST['title'];
         $excel_file=$_FILES['excel_file']['name'];
         $excel->read($excel_file); 
         $n=count($excel->sheets);    
@@ -79,16 +79,16 @@
                                 <img class="img-responsive mx-auto d-block" style="border-radius: 10px; border: solid blue; padding: 2%" src="image/quiz_upload.png" alt="Guideline For Upload"/><hr>
                                 <h4 class="caption text-dark">File Format: filename.xls</h4><hr>
                                 <h4 class="caption text-danger">Your Excel File Must Be in This Given Format. |</h4><hr>
-                                <button onclick="changeView('step1','step2')" class="btn btn-primary">Proceed</button>
+                                <button onclick="changeView('step1','step2')" style="border-radius: 20px;" class="btn btn-primary">Proceed</button>
                             </center>                                                                                                                                                                                                                                   
                         </div>
  		                <div id="step2" class="validation-form" style="display:none">                            
                             <form action="" method="post" enctype="multipart/form-data">
                                 <div class="col-md-12 form-group2 group-mail">
-                                    <label class="control-label"> Exam Title</label>
-                                    <select class="form-control" name="exam_title" required>                                    
-                                        <option value="">Select any exam</option>  <?php $result = $con->query("SELECT * FROM exam where status='0'"); while($row=$result->fetch_assoc()) {?>
-                                        <option value="<?php echo $row['exam_id'] ?>"><?php echo $row['exam_title']; ?></option>  <?php } ?>
+                                    <label class="control-label"> Category Title</label>
+                                    <select class="form-control select2" name="title" required>                                    
+                                        <option value="">Select any exam</option>  <?php $result = $con->query("SELECT * FROM category where status='0'"); while($row=$result->fetch_assoc()) {?>
+                                        <option value="<?php echo $row['id'] ?>"><?php echo $row['title']; ?></option>  <?php } ?>
                                     </select>
                                 </div>
                                 <div class="clearfix"> </div>
@@ -98,9 +98,9 @@
                                 </div>
                                 <div class="clearfix"> </div>                                
                                 <div class="col-md-12 form-group">                                                                        
-                                    <button type="submit" class="btn btn-primary" name="excel_submit">Submit</button>
-                                    <button type="reset" class="btn btn-default" value="reset">Reset</button>
-                                    <button onclick="changeView('step2','step1')" class="btn btn-primary float-right">View Guide-line</button>
+                                    <button type="submit" style="border-radius: 20px; border-color: black;" class="btn btn-primary" name="excel_submit">Submit</button>
+                                    <button type="reset" style="border-radius: 20px; border-color: black;" class="btn btn-default" value="reset">Reset</button>
+                                    <button onclick="changeView('step2','step1')" style="border-radius: 20px; border-color: black;" class="btn btn-primary float-right">View Guide-line</button>
                                 </div>		
                                 <div class="clearfix"> </div>
                             </form>

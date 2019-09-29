@@ -33,7 +33,7 @@
                     <ol class="breadcrumb">
 			            <center>
                             <li class="breadcrumb-item">
-                                <h4><a href="">POST EXAM</a></h4>
+                                <h4><a>POST EXAM</a></h4>
                             </li>
                         </center>
 		            </ol>                    
@@ -54,15 +54,15 @@
                          <?php if($step==0) {?>
                             <form action="" method="post">
                                 <div class="col-md-12 form-group2 group-mail">
-                                    <label class="control-label"> Exam Title</label>
-                                    <select class="form-control" name="exam_title" required>                                    
-                                        <option value="">Select any exam</option>  <?php $result = $con->query("SELECT * FROM exam where status='0'"); while($row=$result->fetch_assoc()) {?>
-                                        <option value="<?php echo $row['exam_id'] ?>"><?php echo $row['exam_title']; ?></option>  <?php } ?>
+                                    <label class="control-label">Category Title</label>
+                                    <select class="form-control select2" name="exam_title" required>                                    
+                                        <option value="">Select any category</option>  <?php $result = $con->query("SELECT * FROM category where status='0'"); while($row=$result->fetch_assoc()) {?>
+                                        <option value="<?php echo $row['id'] ?>"><?php echo $row['title']; ?></option>  <?php } ?>
                                     </select>
                                 </div>
                                 <div class="clearfix"> </div>
                                 <div class="col-md-12 form-group">                                    
-                                    <button type="submit" class="btn btn-primary" name="exam_submit">Save & Next</button>                                    
+                                    <button type="submit" style="border-radius: 20px;" class="btn btn-primary" name="exam_submit">Save & Next</button>                                    
                                 </div>		
                                 <div class="clearfix"> </div>
                             </form>
@@ -78,8 +78,8 @@
                                 </div>
                                 <div class="clearfix"> </div>
                                 <div class="col-md-12 form-group">                                                                        
-                                    <button type="submit" class="btn btn-primary" name="question_submit">Save & Next</button>                                    
-                                    <a class="btn btn-default" href="">Previous</a>                                    
+                                    <button type="submit" style="border-radius: 20px;" class="btn btn-primary" name="question_submit">Save & Next</button>                                    
+                                    <a class="btn btn-default" style="border-radius: 20px;" href="">Previous</a>                                    
                                 </div>		
                                 <div class="clearfix"> </div>
                             </form>

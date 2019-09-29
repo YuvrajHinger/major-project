@@ -55,16 +55,16 @@
                     <li id="menu-academico" >
                         <a>
                             <i class="fa fa-th-list" aria-hidden="true"></i>
-                            <span> Examination</span> 
+                            <span>Examination Category</span> 
                             <span class="fa fa-angle-right" style="float: right"></span>
                             <div class="clearfix"></div>
                         </a>
 					    <ul id="menu-academico-sub" >										   
 							<li id="menu-academico-avaliacoes" >
-                                <a href="add_exam.php" onclick = "getConfirm(this.href);"> Add Exam</a>
+                                <a href="add_category.php" onclick = "getConfirm(this.href);"> Add Category</a>
                             </li>
 							<li id="menu-academico-avaliacoes" >
-                                <a href="list_exam.php"> List Of Examination</a>
+                                <a href="list_category.php"> List Of Examination Category</a>
                             </li>
 						</ul>
 					</li>										 
@@ -77,7 +77,7 @@
                     </li>																         
                     <li>
                         <a>
-                            <i class="fa fa-tachometer"></i> 
+                            <i class="fa fa-code"></i> 
                             <span>Post Exam</span>
                             <span class="fa fa-angle-right" style="float: right"></span>
                             <div class="clearfix"></div>
