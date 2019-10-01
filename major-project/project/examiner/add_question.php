@@ -5,17 +5,17 @@
     require_once 'layout.php';    
     $flag=0;
     if(isset($_POST['question_submit'])){				
-        $exam_id=$_POST['exam_title'];
+        $id=$_POST['exam_title'];
         $question=$_POST['question'];
         $answer=$_POST['answer'];       
-        $query="INSERT INTO answer(answer_text,exam_id) VALUES ('$answer','$exam_id')";
+        $query="INSERT INTO answer(answer_text,category) VALUES ('$answer','$id')";
         if($con->query($query)==TRUE){
             $answer_id=$con->insert_id;
-            $query="INSERT INTO question(question_text,answer_id,exam_id) VALUES ('$question','$answer_id','$exam_id')";        
+            $query="INSERT INTO question(question_text,answer_id,category) VALUES ('$question','$answer_id','$id')";        
             $con->query($query);		
             $option=$_POST['option'];
             foreach($option as $key=>$value){            
-                $query="INSERT INTO answer(answer_text,exam_id) VALUES ('$value','$exam_id')";
+                $query="INSERT INTO answer(answer_text,category) VALUES ('$value','$id')";
                 $con->query($query);		
             }             
             $flag=1;                        

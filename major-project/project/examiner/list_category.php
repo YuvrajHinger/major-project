@@ -39,13 +39,15 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Title</th> 
+                                        <th>Create By</th> 
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>                 <?php $getData=$con->query("select * from category where status='0'"); $i=0; while($fetchData=$getData->fetch_assoc()){ $i++; $id=$fetchData['id']; $title=$fetchData['title'];  ?>
+                                <tbody>                 <?php $getData=$con->query("select * from category where status='0'"); $i=0; while($fetchData=$getData->fetch_assoc()){ $i++; $id=$fetchData['id']; $title=$fetchData['title']; $fetchData1=$con->query("select examiner_username from examiner_login where examiner_id='".$fetchData['examiner_id']."'")->fetch_assoc(); $name=$fetchData1['examiner_username']; ?>
                                     <tr>
                                         <td> <?php echo $i;?></td>
                                         <td><?php echo $title;?></td> 
+                                        <td><?php echo $name;?></td> 
                                         <td>			                                    			                                    
                                             <a class="btn btn-primary" onclick="alert('working soon')">Edit</a>                                            
                                             <a class="btn btn-danger" rel="tooltip" title="Delete"  data-toggle="modal" href="#delete<?php echo $id ;?>">Delete</a>

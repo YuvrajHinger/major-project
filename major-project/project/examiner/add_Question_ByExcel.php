@@ -21,19 +21,19 @@
                 if(isset($sheets['cells'][$row][$col])){
                     $data=$sheets['cells'][$row][$col];
                     if($col==1){
-                        $query="INSERT INTO question(question_text,answer_id,exam_id) VALUES('$data','$a_id','$exam_id')";
+                        $query="INSERT INTO question(question_text,answer_id,category) VALUES('$data','$a_id','$id')";
                         $con->query($query);
                         $q_id=$con->insert_id;
                     }                                
                     else if($col==2){
-                        $query="INSERT INTO answer(answer_text,question_id,exam_id) VALUES('$data','$q_id','$exam_id')";
+                        $query="INSERT INTO answer(answer_text,question_id,category) VALUES('$data','$q_id','$id')";
                         $con->query($query);
                         $a_id=$con->insert_id;
                         $query="UPDATE question SET answer_id='$a_id' WHERE question_id=$q_id";        
                         $con->query($query);
                     }
                     else{
-                        $query="INSERT INTO answer(answer_text,question_id,exam_id) VALUES('$data','$q_id','$exam_id')";
+                        $query="INSERT INTO answer(answer_text,question_id,category) VALUES('$data','$q_id','$id')";
                         $con->query($query);
                     }
                 }                

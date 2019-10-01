@@ -7,7 +7,7 @@
     $flag=0;
     if(isset($_POST['exam_submit'])){
         $step=1;
-        $exam_id=$_POST['exam_title'];
+        $category=$_POST['title'];
     }
     if(isset($_POST['question_submit'])){
         $qid=$_POST['exam_question'];        
@@ -55,7 +55,7 @@
                             <form action="" method="post">
                                 <div class="col-md-12 form-group2 group-mail">
                                     <label class="control-label">Category Title</label>
-                                    <select class="form-control select2" name="exam_title" required>                                    
+                                    <select class="form-control select2" name="title" required>                                    
                                         <option value="">Select any category</option>  <?php $result = $con->query("SELECT * FROM category where status='0'"); while($row=$result->fetch_assoc()) {?>
                                         <option value="<?php echo $row['id'] ?>"><?php echo $row['title']; ?></option>  <?php } ?>
                                     </select>
@@ -72,7 +72,7 @@
                                 <div class="col-md-12 form-group2 group-mail">
                                     <label class="control-label">Select Question</label>
                                     <select class="form-control select2" name="exam_question[]" multiple required>                                    
-                                        <?php $result = $con->query("SELECT * FROM question where status='0' && exam_id='$exam_id'"); while($row=$result->fetch_assoc()) {?>
+                                        <?php $result = $con->query("SELECT * FROM question where status='0' && category='$category'"); while($row=$result->fetch_assoc()) {?>
                                         <option value="<?php echo $row['question_id'] ?>"><?php echo $row['question_text']; ?></option>  <?php } ?>
                                     </select>                                    
                                 </div>
