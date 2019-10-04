@@ -28,7 +28,7 @@
 			</header>
 			<div style="border-top:1px ridge rgba(255, 255, 255, 0.15)"></div>
             <div class="menu">
-                <ul id="menu" >
+                <ul id="menu">
                     <li>
                         <a href="index.php">
                             <i class="fa fa-tachometer"></i> 
@@ -37,36 +37,18 @@
                         </a>
                     </li>																		 
                     <li id="menu-academico" >
-                        <a>
+                        <a href="candidate.php">
                             <i class="fa fa-user" aria-hidden="true"></i>
                             <span> Candidate</span> 
-                            <span class="fa fa-angle-right" style="float: right"></span>
                             <div class="clearfix"></div>
                         </a>
-						<ul id="menu-academico-sub" >										   
-                            <li id="menu-academico-avaliacoes" >
-                                <a href="add_candidate.php">Add Candidate</a>
-                            </li>
-                            <li id="menu-academico-avaliacoes" >
-                                <a href="list_candidate.php"> List Of Candidate</a>
-                            </li>
-                        </ul>
                     </li>										 
                     <li id="menu-academico" >
-                        <a>
-                            <i class="fa fa-th-list" aria-hidden="true"></i>
-                            <span>Examination Category</span> 
-                            <span class="fa fa-angle-right" style="float: right"></span>
+                        <a href="category.php">
+                            <i class="fa fa-list-alt" aria-hidden="true"></i>
+                            <span>Category</span>                             
                             <div class="clearfix"></div>
-                        </a>
-					    <ul id="menu-academico-sub" >										   
-							<li id="menu-academico-avaliacoes" >
-                                <a href="add_category.php" onclick = "getConfirm(this.href);"> Add Category</a>
-                            </li>
-							<li id="menu-academico-avaliacoes" >
-                                <a href="list_category.php"> List Of Examination Category</a>
-                            </li>
-						</ul>
+                        </a>					    
 					</li>										 
 				    <li>
                         <a href="add_question.php">
@@ -77,17 +59,17 @@
                     </li>																         
                     <li>
                         <a>
-                            <i class="fa fa-code"></i> 
+                            <i class="fa fa-sticky-note-o"></i> 
                             <span>Post Exam</span>
                             <span class="fa fa-angle-right" style="float: right"></span>
                             <div class="clearfix"></div>
                         </a>
                         <ul id="menu-academico-sub" >										   
 							<li id="menu-academico-avaliacoes" >
-                                <a href="exam_post.php" onclick = "getConfirm(this.href);"> Post Exam</a>
+                                <a onclick = "alert('working soon');"> Post Exam</a>
                             </li>
 							<li id="menu-academico-avaliacoes" >
-                                <a href="list_post_exam.php"> List Of Exams</a>
+                                <a onclick = "alert('working soon');"> List Of Exams</a>
                             </li>
 						</ul>
                     </li>																		 
@@ -99,22 +81,22 @@
                         </a>
                     </li>									
                     <li>
-                        <a href="logout.php">
+                        <a href="#logout" rel="tooltip" title="log-out"  data-toggle="modal">
                             <i class="fa fa-sign-out"></i>  
                             <span>Log-Out</span>
                             <div class="clearfix"></div>
-                        </a>
+                        </a>                        
                     </li>									
 				</ul>
 		    </div>		
-		    <div class="clearfix"></div>		
+		    <div class="clearfix"></div>		            
 		</div>          <?php
     }
     function script(){  ?>
-        <script>
+        <script>            
             $(function () {
                 $(".select2").select2();		
-                $('.select2-input').addClass('form-control');
+                $('.select2-input').addClass('form-control');                
             });
             window.onload = function() {
 		        history.replaceState("", "", "");
@@ -139,4 +121,28 @@
         <script type="text/javascript" src="select2/jquery.multi-select.js"></script>
         <script src="js/scripts.js"></script>
         <script src="js/bootstrap.min.js"></script>  <?php
-    }   
+    }   ?>
+    <div id="logout" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-md" >
+            <form action="logout.php" method ="post">
+                <div class="modal-content">
+                    <div class="modal-header" style=" background-color: #3E3A86;color:#fff;">
+                        <button type="button" class="close" style="color:#fff !important;opacity:1" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" >
+                            Stay Attention
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                    <h4 class="modal-title">
+                            Confirm log-out
+                        </h4>
+                    </div>                                        
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-sm btn-primary" name="logout">Yes</button>
+                        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
