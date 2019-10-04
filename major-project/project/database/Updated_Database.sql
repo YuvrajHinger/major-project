@@ -1,7 +1,8 @@
-CREATE DATABASE major_project;
--- Database: `major_project`
+DROP DATABASE IF EXISTS major_project;
+CREATE DATABASE major_project
+--  Database: `major_project`
 
---1.
+-- 1.
 CREATE TABLE `candidate_login` (
   `candidate_id` int(11) NOT NULL,
   `candidate_username` varchar(250) NOT NULL,
@@ -20,7 +21,7 @@ ALTER TABLE `candidate_login`
 ALTER TABLE `candidate_login`
   MODIFY `candidate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
---2.
+-- 2.
 CREATE TABLE `examiner_login` (
   `examiner_id` int(11) NOT NULL,
   `examiner_username` varchar(200) NOT NULL,
@@ -38,7 +39,7 @@ ALTER TABLE `examiner_login`
 ALTER TABLE `examiner_login`
   MODIFY `examiner_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---3.
+-- 3.
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `title` varchar(200) NOT NULL,
@@ -57,7 +58,7 @@ ALTER TABLE `category`
 ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
---4.
+-- 4.
 CREATE TABLE `question` (
   `question_id` int(11) NOT NULL,
   `question_text` varchar(200) NOT NULL,
@@ -77,7 +78,7 @@ ALTER TABLE `question`
 ALTER TABLE `question`
   MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
---5.
+-- 5.
 CREATE TABLE `answer` (
   `answer_id` int(11) NOT NULL,
   `answer_text` varchar(200) NOT NULL,
