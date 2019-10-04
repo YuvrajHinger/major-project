@@ -5624,7 +5624,7 @@ li.dropdown.head-dpdn a.dropdown-toggle {
 		left: 78px;
 	}
 	.sidebar-menu {
-       position:absolute;
+       position:fixed;
 	}
 	li.dropdown.head-dpdn a.dropdown-toggle {
     margin: 1em 1.2em;
@@ -5850,7 +5850,7 @@ table th, table td {
 			left: 12%;
 		}
 	 .sidebar-menu {
-          position:absolute;
+          position: fixed;
 	  }
 	 .page-container.sidebar-collapsed .left-content .srch button {
 		cursor: pointer;

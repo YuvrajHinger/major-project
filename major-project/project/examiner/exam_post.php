@@ -10,16 +10,18 @@
         $category=$_POST['title'];
     }
     if(isset($_POST['question_submit'])){
+        echo "<script>alert()</script>";     
         $qid=$_POST['exam_question'];        
         $question_arr='';
         foreach($qid as $key=>$value){            
             $question_arr=$question_arr.'id'.$value;
-        }        
-        $str=explode('id',$question_arr);                
-        $alloted_date=date("Y/m/d");        
-        $query="INSERT INTO exam_posting(question_id,alloted_date) VALUES('$question_arr','$alloted_date')";
-        if($con->query($query)) $flag=1;        
-        else $flag=-1;        
+        }  
+        echo "<script>alert('$question_arr')</script>";     
+        // $str=explode('id',$question_arr);                
+        // $alloted_date=date("Y/m/d");        
+        // $query="INSERT INTO exam_posting(question_id,alloted_date) VALUES('$question_arr','$alloted_date')";
+        // if($con->query($query)) $flag=1;        
+        // else $flag=-1;        
     }
 ?>
 <html>
@@ -70,11 +72,34 @@
                         else if($step==1) { ?>
                             <form action="" method="post">
                                 <div class="col-md-12 form-group2 group-mail">
-                                    <label class="control-label">Select Question</label>
-                                    <select class="form-control select2" name="exam_question[]" multiple required>                                    
-                                        <?php $result = $con->query("SELECT * FROM question where status='0' && category='$category'"); while($row=$result->fetch_assoc()) {?>
-                                        <option value="<?php echo $row['question_id'] ?>"><?php echo $row['question_text']; ?></option>  <?php } ?>
-                                    </select>                                    
+                                    <h4>Select Question</h4>                                    
+                                    <div class="row">                                            
+                                        <div class="col-md-5" style="margin: 10px">                                                            
+                                            <label>
+                                                <input type="checkbox" onchange="selectAll(this.checked)"/>
+                                                Select All
+                                            </label>                                                                                                                                        
+                                        </div>                                                
+                                    </div>
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <td>#</td>                                                                                                
+                                                <td>Question</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody> <?php $result = $con->query("SELECT * FROM question where status='0' && category='$category'"); $i=0; while($row=$result->fetch_assoc()) { $i++;?>
+                                            <tr>    
+                                                <td><?php echo $i; ?></td>                                            
+                                                <td>   
+                                                    <label>                                                                                                                                                         
+                                                        <input name="exam_question[]" type="checkbox" value="<?php echo $row['question_id'] ?>"/>
+                                                        <?php echo $row['question_text']; ?>                                                    
+                                                    </label>
+                                                </td>  
+                                            </tr> <?php } ?>
+                                        </tbody>
+                                    </table>                                    
                                 </div>
                                 <div class="clearfix"> </div>
                                 <div class="col-md-12 form-group">                                                                        
@@ -89,7 +114,15 @@
                 </div>
             </div>            
             <?php script(); ?>
-            <?php sidebar(); ?>
+            <?php sidebar(); ?>            
+            <script>
+            function selectAll(value){
+                checkbox = document.querySelectorAll('input[type="checkbox"]');                
+                for(i=0;i<checkbox.length;i++){
+                    checkbox[i].checked=value;
+                }                
+            }
+            </script>
         </div>        
     </body>
 </html>

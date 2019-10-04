@@ -34,68 +34,61 @@
                     <ol class="breadcrumb">                                                
 			            <center>
                             <li class="breadcrumb-item">
-                                <h4 class="clearfix">
-                                    <a href="add_Question_ByExcel.php" class="float-right btn btn-warning">
-                                        <i class="fa fa-file-excel-o"> Excel</i>                                        
-                                    </a>                                    
+                                <h4>                                    
                                     <a>Add Question</a>                                                                        
                                 </h4>
                             </li>                            
                         </center>
 		            </ol>
                     <div class="validation-system"> 		                        
- 		                <div class="validation-form">
-                            <?php if($flag==1){ ?>
-                                <div class="alert alert-success alert-dismissible">                  			
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                    <i class="icon fa fa-angle-right"></i> SuccessFullyRegisterd Question.
-                                </div> 
-                            <?php  }
-                            else if($flag==-1){ ?>
-                                <div class="alert alert-danger alert-dismissible">                  			
-							        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                  			        <i class="icon fa fa-ban"></i> Problem Inserting Data.
-              			        </div> 
-                            <?php  } ?>
-                            <form action="" method="post">
-                                <div class="col-md-12 form-group2 group-mail">
-                                    <label class="control-label"> Examination Category</label>
-                                    <select style="border-radius: 20px;" class="form-control select2" name="title" required>                                    
-                                        <option value="" selected>Select any title</option>  <?php $result = $con->query("SELECT * FROM category where status='0'"); while($row=$result->fetch_assoc()) {?>
-                                        <option value="<?php echo $row['id'] ?>"><?php echo $row['title']; ?></option>  <?php } ?>
-                                    </select>
+                        <div class="validation-form">                                                                                                                        
+                            <a href="add_Question_ByExcel.php" class="float-right btn btn-warning">
+                                <i class="fa fa-file-excel-o"> Excel</i>                                        
+                            </a>                                                                        
+                            <form action="" method="post" class="myform">
+                                <div class="row">                                
+                                    <div class="col-md-7" style="margin-bottom: 10px">
+                                        <div class="form-group group-mail">
+                                            <label class="control-label"> Examination Category</label>
+                                            <select style="border-radius: 20px;" class="form-control select2" name="title" required>                                    
+                                                <option value="" selected>Select any title</option>  <?php $result = $con->query("SELECT * FROM category where status='0'"); while($row=$result->fetch_assoc()) {?>
+                                                <option value="<?php echo $row['id'] ?>"><?php echo $row['title']; ?></option>  <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                        <div class="form-group group-mail">
+                                            <label class="control-label"> Question ?</label>
+                                            <textarea style="border-radius: 20px; color: black;" class="form-control" rows="3"  name="question" autofocus required></textarea>
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                        <div class="form-group group-mail">
+                                            <label class="control-label"> Answer</label>
+                                            <textarea style="border-radius: 20px; color: black;" class="form-control" rows="3" name="answer" required></textarea>
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                    <div class="col-md-5" style="margin-bottom: 10px">                                    
+                                        <table class="table table-bordered table-hover" id="option_ans">
+                                            <tr id="option_content">
+                                                <td>
+                                                    <label class="control-label">Option</label>                                
+                                                    <textarea style="border-radius: 20px; color: black;" class="form-control" rows="3" name="option[]" required></textarea>                                                
+                                                </td>                                                
+                                            </tr>
+                                        </table>
+                                        <div class="clearfix"> </div>
+                                        <?php if($flag==1){ ?> <div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fa fa-angle-right"></i> Successfully Registerd Question.</div> <?php  }else if($flag==-1){ ?><div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fa fa-ban"></i> Problem Inserting Data.</div> <?php  } ?>
+                                        <div class="col-md-12 form-group">
+                                            <button type="submit" style="border-radius: 20px;" class="btn btn-success" name="question_submit">Submit</button>
+                                            <button type="button" style="border-radius: 20px;" class="btn btn-primary" onclick="add_option('option_ans','option_content')">Add Option</button>                                            
+                                            <button type="reset" style="border-radius: 20px;" class="btn btn-default" value="reset">Reset</button>
+                                        </div>		
+                                        <div class="clearfix"> </div>
+                                    </div>
                                 </div>
-                                <div class="clearfix"> </div>
-                                <div class="col-md-12 form-group1 group-mail">                                                        
-                                    <label class="control-label"> Question ?</label>
-                                    <textarea style="border-color: black; border-radius: 20px; color: black;" class="form-control" rows="2"  name="question" autofocus required></textarea>
-                                </div>
-                                <div class="clearfix"> </div>
-                                <div class="col-md-12 form-group1 group-mail">                                                        
-                                    <label class="control-label"> Answer</label>
-                                    <textarea style="border-color: black; border-radius: 20px; color: black;" class="form-control" rows="3" name="answer" required></textarea>
-                                </div>
-                                <div class="clearfix"> </div>
-                                <div class="col-md-12 form-group1 group-mail">                                                                                            
-                                    <table class="table table-bordered table-hover" id="option_ans">
-                                        <tr id="option_content">
-                                            <td>
-                                                <label class="control-label">Option</label>                                
-                                                <textarea style="border-color: black; border-radius: 20px; color: black;" class="form-control" rows="3" name="option[]" required></textarea>                                                
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>                                                                
-                                <div class="clearfix"> </div>
-                                <div class="col-md-12 form-group">
-                                    <button type="button" style="border-radius: 20px;" class="btn btn-danger" onclick="add_option('option_ans','option_content')">Add Option</button>
-                                    <button type="submit" style="border-radius: 20px;" class="btn btn-primary" name="question_submit">Submit</button>
-                                    <button type="reset" style="border-radius: 20px;" class="btn btn-default" value="reset">Reset</button>
-                                </div>		
-                                <div class="clearfix"> </div>
                             </form>
                         </div>
-                    </div>                    
+                    </div>                                                                                                                                        
                 </div>
             </div>
             <script>
@@ -115,6 +108,12 @@
             </script>
             <?php script(); ?>
             <?php sidebar(); ?>
+            <style>
+                .myform{
+                    padding: 30px;                                    
+                    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+                }            
+            </style>            
         </div>        
     </body>
 </html>
