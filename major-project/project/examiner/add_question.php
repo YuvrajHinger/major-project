@@ -5,17 +5,17 @@
     require_once 'layout.php';    
     $flag=0;
     if(isset($_POST['question_submit'])){				
-        $exam_id=$_POST['exam_title'];
+        $id=$_POST['exam_title'];
         $question=$_POST['question'];
         $answer=$_POST['answer'];       
-        $query="INSERT INTO answer(answer_text,exam_id) VALUES ('$answer','$exam_id')";
+        $query="INSERT INTO answer(answer_text,category) VALUES ('$answer','$id')";
         if($con->query($query)==TRUE){
             $answer_id=$con->insert_id;
-            $query="INSERT INTO question(question_text,answer_id,exam_id) VALUES ('$question','$answer_id','$exam_id')";        
+            $query="INSERT INTO question(question_text,answer_id,category) VALUES ('$question','$answer_id','$id')";        
             $con->query($query);		
             $option=$_POST['option'];
             foreach($option as $key=>$value){            
-                $query="INSERT INTO answer(answer_text,exam_id) VALUES ('$value','$exam_id')";
+                $query="INSERT INTO answer(answer_text,category) VALUES ('$value','$id')";
                 $con->query($query);		
             }             
             $flag=1;                        
@@ -59,21 +59,21 @@
                             <?php  } ?>
                             <form action="" method="post">
                                 <div class="col-md-12 form-group2 group-mail">
-                                    <label class="control-label"> Exam Title</label>
-                                    <select class="form-control" name="exam_title" required>                                    
-                                        <option value="">Select any exam</option>  <?php $result = $con->query("SELECT * FROM exam where status='0'"); while($row=$result->fetch_assoc()) {?>
-                                        <option value="<?php echo $row['exam_id'] ?>"><?php echo $row['exam_title']; ?></option>  <?php } ?>
+                                    <label class="control-label"> Examination Category</label>
+                                    <select style="border-radius: 20px;" class="form-control select2" name="title" required>                                    
+                                        <option value="" selected>Select any title</option>  <?php $result = $con->query("SELECT * FROM category where status='0'"); while($row=$result->fetch_assoc()) {?>
+                                        <option value="<?php echo $row['id'] ?>"><?php echo $row['title']; ?></option>  <?php } ?>
                                     </select>
                                 </div>
                                 <div class="clearfix"> </div>
                                 <div class="col-md-12 form-group1 group-mail">                                                        
                                     <label class="control-label"> Question ?</label>
-                                    <textarea class="form-control" rows="2"  name="question" required></textarea>
+                                    <textarea style="border-color: black; border-radius: 20px; color: black;" class="form-control" rows="2"  name="question" autofocus required></textarea>
                                 </div>
                                 <div class="clearfix"> </div>
                                 <div class="col-md-12 form-group1 group-mail">                                                        
                                     <label class="control-label"> Answer</label>
-                                    <textarea class="form-control" rows="3" name="answer" required></textarea>
+                                    <textarea style="border-color: black; border-radius: 20px; color: black;" class="form-control" rows="3" name="answer" required></textarea>
                                 </div>
                                 <div class="clearfix"> </div>
                                 <div class="col-md-12 form-group1 group-mail">                                                                                            
@@ -81,16 +81,16 @@
                                         <tr id="option_content">
                                             <td>
                                                 <label class="control-label">Option</label>                                
-                                                <textarea class="form-control" rows="3" name="option[]" required></textarea>                                                
+                                                <textarea style="border-color: black; border-radius: 20px; color: black;" class="form-control" rows="3" name="option[]" required></textarea>                                                
                                             </td>
                                         </tr>
                                     </table>
                                 </div>                                                                
                                 <div class="clearfix"> </div>
                                 <div class="col-md-12 form-group">
-                                    <button type="button" class="btn btn-danger" onclick="add_option('option_ans','option_content')">Add Option</button>
-                                    <button type="submit" class="btn btn-primary" name="question_submit">Submit</button>
-                                    <button type="reset" class="btn btn-default" value="reset">Reset</button>
+                                    <button type="button" style="border-radius: 20px;" class="btn btn-danger" onclick="add_option('option_ans','option_content')">Add Option</button>
+                                    <button type="submit" style="border-radius: 20px;" class="btn btn-primary" name="question_submit">Submit</button>
+                                    <button type="reset" style="border-radius: 20px;" class="btn btn-default" value="reset">Reset</button>
                                 </div>		
                                 <div class="clearfix"> </div>
                             </form>
@@ -105,7 +105,7 @@
                 cellId = document.getElementById(cellId);
                 row.innerHTML = cellId.innerHTML;
                 var cell = row.insertCell();
-                cell.innerHTML = '<a class="btn btn-danger" onclick="delete_option(\''+tableId+'\',this)">Delete Option</a>';
+                cell.innerHTML = '<a class="btn btn-danger" style="border-radius: 20px;" onclick="delete_option(\''+tableId+'\',this)">Delete Option</a>';
             }
             function delete_option(tableId,i){          
                 i = i.parentNode.parentNode.rowIndex;      

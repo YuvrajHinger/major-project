@@ -6,7 +6,7 @@
     $deleteFlag=0;
     if(isset($_POST['deleteAction'])){
         $delete_id=$_POST['delete_id'];
-        $con->query("update exam SET `status`='1' where exam_id='$delete_id'" );                                                                                
+        $con->query("update category SET `status`='1' where id='$delete_id'" );                                                                                
         $deleteFlag=1;
     } 
 ?>
@@ -21,7 +21,7 @@
                     <ol class="breadcrumb">
 			            <center>
                             <li class="breadcrumb-item">
-                                <h4><a href="">Examiantion Category List</a></h4>
+                                <h4><a>Examination Category List</a></h4>
                             </li>
                         </center>
 		            </ol>        
@@ -31,24 +31,26 @@
                             <?php if($deleteFlag==1){ ?>
                                 <div class="alert alert-success alert-dismissible">                  			
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                    <i class="icon fa fa-angle-right"></i> SuccessFully Deleted Exams.
+                                    <i class="icon fa fa-angle-right"></i> SuccessFully Deleted Category.
                                 </div> 
                             <?php  }            ?>                    
-                            <table width="100%" id="table" class="table table-bordered table-hover">
+                            <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>Title</th> 
+                                        <th>Create By</th> 
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>                 <?php $getData=$con->query("select * from exam where status='0'"); $i=0; while($fetchData=$getData->fetch_assoc()){ $i++; $id=$fetchData['exam_id']; $exam_title=$fetchData['exam_title'];  ?>
+                                <tbody>                 <?php $getData=$con->query("select * from category where status='0'"); $i=0; while($fetchData=$getData->fetch_assoc()){ $i++; $id=$fetchData['id']; $title=$fetchData['title']; $fetchData1=$con->query("select examiner_username from examiner_login where examiner_id='".$fetchData['examiner_id']."'")->fetch_assoc(); $name=$fetchData1['examiner_username']; ?>
                                     <tr>
                                         <td> <?php echo $i;?></td>
-                                        <td  width="50%"><?php echo $exam_title;?></td> 
+                                        <td><?php echo $title;?></td> 
+                                        <td><?php echo $name;?></td> 
                                         <td>			                                    			                                    
                                             <a class="btn btn-primary" onclick="alert('working soon')">Edit</a>                                            
-                                            <a class="btn btn-danger" rel="tooltip" title="Delete"  data-toggle="modal" href="#delete<?php echo $id ;?>">Delete</a>                                                                                        
+                                            <a class="btn btn-danger" rel="tooltip" title="Delete"  data-toggle="modal" href="#delete<?php echo $id ;?>">Delete</a>
                                             <div id="delete<?php echo $id ;?>" class="modal fade" role="dialog">
                                                 <div class="modal-dialog modal-md" >
                                                     <form method ="post">

@@ -32,7 +32,7 @@
                     <ol class="breadcrumb">
 			            <center>
                             <li class="breadcrumb-item">
-                                <h4><a href="">Add Exam</a></h4>
+                                <h4><a href="">Add Examination Category</a></h4>
                             </li>
                         </center>
 		            </ol>
@@ -41,7 +41,7 @@
                             <?php if($flag==1){ ?>
                                 <div class="alert alert-success alert-dismissible">                  			
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                    <i class="icon fa fa-angle-right"></i> SuccessFullyRegisterd Exam.
+                                    <i class="icon fa fa-angle-right"></i> SuccessFully Registerd Exam.
                                 </div> 
                             <?php  }
                             else if($flag==-1){ ?>
@@ -52,7 +52,7 @@
                             <?php  } ?>
                             <form action="" method="post">
                                 <div class="col-md-12 form-group2 group-mail">
-                                    <label class="control-label"> Exam Title</label>
+                                    <label class="control-label"> Title</label>
                                     <input type="text" name="exam_title" class="form-control" placeholder="Exam Title..." required>
                                 </div>
                                 <div class="clearfix"> </div>

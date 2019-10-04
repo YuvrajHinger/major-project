@@ -1,18 +1,39 @@
-CREATE TABLE `answer` (
-  `answer_id` int(11) NOT NULL,
-  `answer_text` varchar(200) NOT NULL,
-  `exam_id` int(11) NOT NULL,
+DROP TABLE `category`;
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL,
+  `title` varchar(200) NOT NULL,  
+  `examiner_id` int(11) NOT NULL,
   `status` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `answer` (`answer_id`, `answer_text`, `exam_id`, `status`) VALUES
-(1, 'Hyper Text Markup Language', 1, 0),
-(2, 'High Text Markup Language', 1, 0),
-(3, 'Hyper Text Make Language', 1, 0),
-(4, 'High-Level Textual Markup Language', 1, 0),
-(5, 'Javascript', 1, 0),
-(6, 'JavaStyle', 1, 0),
-(7, 'JavaSide', 1, 0);
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `title` (`title`);
+
+ALTER TABLE `category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+
+CREATE TABLE `answer` (
+  `answer_id` int(11) NOT NULL,
+  `answer_text` varchar(200) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `exam_id` int(11) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;      
+
+INSERT INTO `answer` (`answer_id`, `answer_text`, `question_id`, `exam_id`, `status`) VALUES
+(1, 'Hyper Text Markup Language', 1, 1, 0),
+(2, 'High Text Markup Language', 1, 1, 0),
+(3, 'Hyper Text Make Language', 1, 1, 0),
+(4, 'High-Level Textual Markup Language', 1, 1, 0),
+(5, 'Javascript', 2, 1, 0),
+(6, 'JavaStyle', 2, 1, 0),
+(7, 'JavaSide', 2, 1, 0),
+(8, 'cascading style sheet', 3, 1, 0),
+(9, 'cascade style show', 3, 1, 0),
+(10, 'casecade style sheet', 3, 1, 0),
+(11, 'cascading style show', 3, 1, 0);
 
 CREATE TABLE `candidate_login` (
   `candidate_id` int(11) NOT NULL,
@@ -61,7 +82,8 @@ CREATE TABLE `question` (
 
 INSERT INTO `question` (`question_id`, `question_text`, `answer_id`, `exam_id`, `status`) VALUES
 (1, 'HTML Stands For', 1, 1, 0),
-(2, 'JS Stands For', 5, 1, 0);
+(2, 'JS Stands For', 5, 1, 0),
+(3, 'CSS Stands For',8,1,0);
 
 ALTER TABLE `answer`
   ADD PRIMARY KEY (`answer_id`);
