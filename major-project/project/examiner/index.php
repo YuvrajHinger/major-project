@@ -15,8 +15,8 @@
                     <ol class="breadcrumb">
 			            <center>
                             <li class="breadcrumb-item">
-                                <h4 class="clearfix">
-                                    <a class="float-right text-danger" id="date">                                        
+                                <h4 class="clearfix">                                
+                                    <a class="float-right text-danger" id="date">                                                                            
                                     </a>
                                     <a class="float-left text-danger" id="time">                                        
                                     </a>

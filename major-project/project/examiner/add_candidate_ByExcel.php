@@ -3,7 +3,7 @@
     if(empty($_SESSION['examiner_id'])) header("Location: login.php");
     require_once 'database.php';
     require_once 'layout.php';    
-    include 'excel_reader.php';
+    require_once 'excel_reader.php';
     $excel = new PhpExcelReader;    
     $flag=0;
     if(isset($_POST['excel_submit'])){				        
@@ -61,7 +61,7 @@
                             <?php  } ?>
                                 <center>
                                     <h3>Guideline to Upload Excel File</h3><hr>
-                                    <img class="img-responsive mx-auto d-block" style="border-radius: 10px; border: solid blue; padding: 2%" src="image/candidate_upload.png" alt="Guideline For Upload"/><hr>
+                                    <img class="img-responsive mx-auto d-block" style="border-radius: 10px; border: solid blue; padding: 2%" src="../include/image/candidate_upload.png" alt="Guideline For Upload"/><hr>
                                     <h4 class="caption text-dark">File Format: filename.xls</h4><hr>
                                     <h4 class="caption text-danger">Your Excel File Must Be in This Given Format. |</h4><hr>                                    
                                 </center>

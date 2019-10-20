@@ -47,7 +47,7 @@
                                         </thead>
                                         <tbody>                 
                                             <?php $getData=$con->query("select * from category where status='0'"); $i=0; 
-                                            while($fetchData=$getData->fetch_assoc()){ $i++; $id=$fetchData['id']; $title=$fetchData['title']; $fetchData1=$con->query("select examiner_username from examiner_login where examiner_id='".$fetchData['examiner_id']."'")->fetch_assoc(); $name=$fetchData1['examiner_username']; ?>
+                                            while($fetchData=$getData->fetch_assoc()){ $i++; $id=$fetchData['id']; $title=$fetchData['title']; $fetchData1=$con->query("select examiner_username from examiner_login where status=0 and examiner_id='".$fetchData['examiner_id']."'")->fetch_assoc(); $name=$fetchData1['examiner_username']; ?>
                                             <tr>
                                                 <td> <?php echo $i;?></td>
                                                 <td><?php echo $title;?></td> 

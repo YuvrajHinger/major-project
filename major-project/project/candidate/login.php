@@ -37,12 +37,12 @@
 		            <form action="" method="post">
 			            <div class="username">
 				            <span class="username">Username:</span>
-				            <input type="text" name="username" class="name" placeholder="" required="">
+				            <input type="text" name="username" class="name" placeholder="" value="user" required="">
 				            <div class="clearfix"></div>
 			            </div>
 			            <div class="password-agileits">
 				            <span class="username">Password:</span>
-				            <input type="password" name="password" class="password" placeholder="" required="">
+				            <input type="password" name="password" class="password" placeholder="" value="user" required="">
 				            <div class="clearfix"></div>
 			            </div>						
 			            <div class="login-w3">

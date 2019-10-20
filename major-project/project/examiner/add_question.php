@@ -5,17 +5,22 @@
     require_once 'layout.php';    
     $flag=0;
     if(isset($_POST['question_submit'])){				
-        $id=$_POST['exam_title'];
+        $id=$_POST['title'];
         $question=$_POST['question'];
         $answer=$_POST['answer'];       
-        $query="INSERT INTO answer(answer_text,category) VALUES ('$answer','$id')";
+        $q_id=0;
+        $a_id=0;
+        $query="INSERT INTO question(question_text,answer_id,category) VALUES('$question','$a_id','$id')";        
         if($con->query($query)==TRUE){
-            $answer_id=$con->insert_id;
-            $query="INSERT INTO question(question_text,answer_id,category) VALUES ('$question','$answer_id','$id')";        
+            $q_id=$con->insert_id;
+            $query="INSERT INTO answer(answer_text,question_id,category) VALUES('$answer','$q_id','$id')";
+            $con->query($query);		
+            $a_id=$con->insert_id;
+            $query="UPDATE question SET answer_id='$a_id' WHERE question_id=$q_id";        
             $con->query($query);		
             $option=$_POST['option'];
             foreach($option as $key=>$value){            
-                $query="INSERT INTO answer(answer_text,category) VALUES ('$value','$id')";
+                $query="INSERT INTO answer(answer_text,question_id,category) VALUES('$value','$q_id','$id')";
                 $con->query($query);		
             }             
             $flag=1;                        
