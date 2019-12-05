@@ -226,9 +226,10 @@
                 }
                 function updateProgressBar(ths){                                                                    
                     if(attempted.includes(ths.name)) return;                    
-                    attempted[attempted_index++]=ths.name;
+                    attempted[++attempted_index]=ths.name;
                     progress_bar.innerHTML=attempted_index;
-                    progress_bar.style.width=attempted_index/parseInt(total_question)*100+"%";
+                    temp=attempted_index+1;
+                    progress_bar.style.width=temp/parseInt(total_question)*100+"%";
                     classes=document.getElementsByClassName("quizBox");
                     for(i=0;i<classes.length;i++){
                         if(classes[i].style.display=='block'){
