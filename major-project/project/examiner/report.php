@@ -9,6 +9,19 @@
         $_SESSION['score']=$_POST['score'];
         header("Location: report_detail.php");
     }
+    if(isset($_POST['filter_search'])){
+        if($_POST['search_by_exam']){
+            if($_POST['search_by_candidate']){
+
+            }
+            else{
+
+            }
+        }       
+        else if($_POST['search_by_candidate']){
+        
+        }
+    }
 ?>
 <html>
     <head>
@@ -25,7 +38,45 @@
                             </li>
                         </center>
 		            </ol>
-                    
+                    <ol class="breadcrumb">
+                        <hr>
+                        <form action="" method="post" class="myform">
+                            <div class="row">
+                                <div class="col-md-3" style="margin: 5px;">
+                                    <select name="search_by_exam" class="form-control select2">                                    
+                                        <option value="" selected>Search By Exam</option>  
+                                        <?php $result = $con->query("SELECT Distinct exam_id FROM report"); 
+                                        while($row=$result->fetch_assoc()) {?>
+                                        <option value="<?php echo $row['exam_id'] ?>">
+                                            <?php 
+                                                $result1 = $con->query("SELECT title FROM active_exams where id='".$row['exam_id']."'"); 
+                                                $row1=$result1->fetch_assoc(); 
+                                                echo $row1['title']; 
+                                            ?>
+                                        </option>  <?php } ?>
+                                    </select>
+                                    
+                                </div>
+                                <div class="col-md-3" style="margin: 5px;">
+                                    <select name="search_by_candidate" class="form-control select2" name="title">                                    
+                                        <option value="" selected>Search By Candidate</option>  
+                                        <?php $result = $con->query("SELECT Distinct applicant_id FROM report"); 
+                                        while($row=$result->fetch_assoc()) {?>
+                                        <option value="<?php echo $row['applicant_id'] ?>">
+                                            <?php 
+                                                $result1 = $con->query("SELECT candidate_username FROM candidate_login where candidate_id='".$row['applicant_id']."'"); 
+                                                $row1=$result1->fetch_assoc(); 
+                                                echo $row1['candidate_username']; 
+                                            ?>
+                                        </option>  <?php } ?>
+                                    </select>			                        
+                                </div>                                
+                                <div class="col-md-3" style="margin: 5px;">
+                                    <button type="submit" class="btn btn-primary" name="filter_search">Filter</button>
+                                    <button class="btn btn-primary" onclick="window.location.href=''">Reset</button>
+                                </div>
+                            </div>
+                        </form>		            <hr>
                     <div class="bg-light table-responsive">                
                     <table class="table table-bordered table-hover">
                         <thead>
@@ -44,14 +95,15 @@
                         </thead>
                         <tbody>
                         <?php 
-                        $query="select * from active_exams where status=0 and examiner_id='".$_SESSION['examiner_id']."'";
+                        $query="select * from active_exams where status=0 and examiner_id='".$_SESSION['examiner_id']."' order by date desc";
                         $result=$con->query($query);
-                        $index=0;
+                        $index=0;                        
                         while($fetchData=$result->fetch_assoc()){                                                        
                             $exam=$fetchData['title'];
                             $date=$fetchData['date'];
                             $total_question=$fetchData['total_question'];                            
                             $negative_marking=$fetchData['negative_marking'];
+                            $total_marks=$fetchData['total_marks'];
                             $result1=$con->query("select * from report where exam_id='".$fetchData['id']."'");
                             while($fetchData1=$result1->fetch_assoc()){
                                 $index++;
@@ -71,7 +123,8 @@
                                 $score=$correct;
                                 if($negative_marking=="yes"){
                                     $score=$score-($wrong/2);
-                                }                            
+                                }                                                                                            
+                                $score=$score*$total_marks/$total_question;
                         ?>
                             <tr>
                                 <td><?php echo $index; ?></td>
@@ -81,7 +134,7 @@
                                 <td><?php echo $total_question; ?></td>
                                 <td><?php echo $correct; ?></td>
                                 <td><?php echo $wrong; ?></td>
-                                <td><?php echo $score; ?></td>
+                                <td><?php echo $score."/".$total_marks; ?></td>
                                 <td><?php echo $negative_marking; ?></td>
                                 <td>
                                     <form method="post">
@@ -96,17 +149,11 @@
                         </tbody>
                     </table>
                     </div>
+                    </ol>
                 </div>
-            </div>
-            <?php sidebar(); ?>
-        </div>
-        <?php script(); ?>
-        <style>
-            .myform{
-                margin: 0px 0px 10px 0px;
-                padding: 30px;                                    
-                box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-            }            
-        </style>
+            </div>            
+            <?php script(); ?>
+            <?php sidebar(); ?>            
+        </div>                
     </body>
 </html>

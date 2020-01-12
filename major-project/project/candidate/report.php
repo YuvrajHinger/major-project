@@ -46,11 +46,12 @@
                         $index=0;
                         while($fetchData=$result->fetch_assoc()){                            
                             $index++;
-                            $fetchData1=$con->query("select * from active_exams where status=0 and id='".$fetchData['exam_id']."'")->fetch_assoc(); 
+                            $fetchData1=$con->query("select * from active_exams where status=0 and id='".$fetchData['exam_id']."' order by date desc")->fetch_assoc(); 
                             $exam=$fetchData1['title'];
                             $date=$fetchData1['date'];
                             $negative_marking=$fetchData1['negative_marking'];
                             $total_question=$fetchData1['total_question'];                            
+                            $total_marks=$fetchData1['total_marks'];
                             $report=$fetchData['report'];
                             $report=json_decode($report);
                             $correct=0;
@@ -69,6 +70,7 @@
                             if($negative_marking=="yes"){
                                 $score=$score-($wrong/2);
                             }
+                            $score=$score*$total_marks/$total_question;
                         ?>
                             <tr>
                                 <td><?php echo $index; ?></td>
@@ -77,7 +79,7 @@
                                 <td><?php echo $total_question; ?></td>
                                 <td><?php echo $correct; ?></td>
                                 <td><?php echo $wrong; ?></td>
-                                <td><?php echo $score; ?></td>
+                                <td><?php echo $score."/".$total_marks; ?></td>
                                 <td>
                                     <form method="post">
                                         <input type="hidden" name="exam_id" value="<?php echo $fetchData['exam_id']; ?>"/>

@@ -4,6 +4,7 @@
     require_once 'database.php';
     require_once 'layout.php';    
     $flag=0;
+    $delete_alert=0;
     if(isset($_POST['candidate_submit'])){				
         $candidate_username=$_POST['candidate_username'];
         $result = $con->query("select candidate_id from candidate_login where candidate_username='$candidate_username'");
@@ -15,7 +16,17 @@
             $flag=1;
         }			
         else $flag=-1;			
-	}	
+    }	    
+    if(isset($_POST['delete_id'])){				
+        $delete_alert=1;
+        $delete_id=$_POST['delete_id'];
+        if($con->query("update `candidate_login` SET `status`='1' where candidate_id='$delete_id'")) $delete_alert=1;
+        else $delete_alert=-1;
+    }	
+    if(isset($_POST['edit_id'])){		
+        $_SESSION['candidate_edit_id']=$_POST['edit_id'];
+        header("Location: candidate_edit.php");
+    }		
 ?>
 <html>
     <head>
@@ -38,6 +49,7 @@
                         <div class="validation-form">                                                                                            
                             <div class="row">
                                 <div class="col-md-7" style="margin-bottom: 10px">
+                                    <?php if($delete_alert==1){ ?><div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fa fa-angle-right"></i> Successfully Deleted Candidate.</div> <?php  }else if($delete_alert==-1){ ?><div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fa fa-ban"></i> Problem Deleting Data.</div> <?php  } ?>
                                     <table class="table table-bordered table-hover myform">
                                         <thead>                                    
                                             <tr>
@@ -55,7 +67,7 @@
                                                 <td><?php echo $username;?></td> 
                                                 <td><?php echo $password;?></td> 
                                                 <td>			                                    			                                    
-                                                    <a class="btn btn-primary" onclick="alert('working soon')">Edit</a>
+                                                    <a class="btn btn-primary" rel="tooltip" title="Edit"  data-toggle="modal" href="#edit<?php echo $id ;?>">Edit</a>
                                                     <a class="btn btn-danger" rel="tooltip" title="Delete"  data-toggle="modal" href="#delete<?php echo $id ;?>">Delete</a>                                                                                        
                                                     <div id="delete<?php echo $id ;?>" class="modal fade" role="dialog">
                                                         <div class="modal-dialog modal-md" >
@@ -63,6 +75,16 @@
                                                                 <div class="modal-header" style=" background-color: #3E3A86;color:#fff;"><button type="button" class="close" style="color:#fff !important;opacity:1" data-dismiss="modal">&times;</button><h4 class="modal-title" >Stay Attention</h4></div>
                                                                 <div class="modal-body"><h4 class="modal-title">Are you sure you want to remove this record?</h4></div>
                                                                 <input type="hidden" value="<?php echo $id; ?>" name="delete_id">
+                                                                <div class="modal-footer"><button type="submit" class="btn btn-sm btn-primary" name="deleteAction">Yes</button><button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cancel</button></div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <div id="edit<?php echo $id ;?>" class="modal fade" role="dialog">
+                                                        <div class="modal-dialog modal-md" >
+                                                            <form method="post" class="modal-content">                                                        
+                                                                <div class="modal-header" style=" background-color: #3E3A86;color:#fff;"><button type="button" class="close" style="color:#fff !important;opacity:1" data-dismiss="modal">&times;</button><h4 class="modal-title" >Stay Attention</h4></div>
+                                                                <div class="modal-body"><h4 class="modal-title">Are you sure you want to edit this record?</h4></div>
+                                                                <input type="hidden" value="<?php echo $id; ?>" name="edit_id">
                                                                 <div class="modal-footer"><button type="submit" class="btn btn-sm btn-primary" name="deleteAction">Yes</button><button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cancel</button></div>
                                                             </form>
                                                         </div>

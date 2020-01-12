@@ -59,7 +59,15 @@
                                 </div>
                                 <div class="four-text">
                                     <h3>Active Exams</h3>
-								    <h3> Update Soon </h3>								
+                                    <h3> 
+                                        <?php
+                                            date_default_timezone_set('Asia/Calcutta');                            
+                                            $cdate=date("y-m-d");
+                                            $ctime=date("h:i:s");
+                                            $query="select * from active_exams where status=0 and (date>='$cdate')"; 
+                                            echo $con->query($query)->num_rows; 
+                                        ?>  
+                                    </h3>								
                                 </div>
                             </div><br>
                         </div>
@@ -72,7 +80,17 @@
                                 </div>
                                 <div class="four-text">
                                     <h3>Report</h3>
-								    <h3> Update Soon </h3>								
+								    <h3> 
+                                        <?php
+                                            $report_count=0;
+                                            $query="select * from active_exams where status=0 and examiner_id='".$_SESSION['examiner_id']."' order by date desc";
+                                            $result=$con->query($query);
+                                            while($fetchData=$result->fetch_assoc()){                                                        
+                                                $report_count+=$con->query("select * from report where exam_id='".$fetchData['id']."'")->num_rows;                                                
+                                            }
+                                            echo $report_count; 
+                                        ?>  
+                                    </h3>								
                                 </div>
                             </div><br>
                         </div>

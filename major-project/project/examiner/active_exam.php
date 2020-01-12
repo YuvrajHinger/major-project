@@ -112,7 +112,7 @@
                                             </tr>                                    
                                         </thead>
                                         <tbody>              
-                                            <?php $query="select * from `active_exams` where status = '0'"; $getData=$con->query($query); $i=0; 
+                                            <?php $query="select * from `active_exams` where status = '0' order by date desc"; $getData=$con->query($query); $i=0; 
                                             while($fetchData=$getData->fetch_assoc()){ $i++;  $id=$fetchData['id']; $title=$fetchData['title']; $key=$fetchData['exam_key']; $date=$fetchData['date']; $date=date("d-m-y",strtotime($date)); $fetchData1=$con->query("select examiner_username from examiner_login where examiner_id='".$fetchData['examiner_id']."'")->fetch_assoc(); $name=$fetchData1['examiner_username']; ?>
                                             <tr>
                                                 <td> <?php echo $i;?></td>

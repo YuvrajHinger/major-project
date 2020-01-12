@@ -30,7 +30,61 @@
                     
                     <div class="bg-light breadcrumb">                                    
                         <h4>Exam Title: <?php echo $fetchData['title']; ?></h4>
-                        <h4>Score: <?php echo $_SESSION['detail_score']; ?></h4>
+                        <h4>Score: <?php echo $_SESSION['detail_score']."/".$fetchData['total_marks']; ?></h4>
+                        <div id="third" class="row" style="margin: 5px;border:1px solid grey; padding: 10px">                            
+                            <div class="col-md-8">
+                            <h5>Chart Repersentation</h5>
+                        <?php 
+                            $count=count($report);           
+                            $graph=array();                 
+                            for($i=0;$i<$count;$i++){
+                                $question=$report[$i]->qid;
+                                $your_answer=$report[$i]->aid;
+                                $answer=$con->query("select answer_id from question where question_id='$question' and status='0'")->fetch_assoc();
+                                $answer=$answer['answer_id'];
+                                if($your_answer==$answer) $correct=true;
+                                else $correct=false;
+                                $categ=$con->query("select category from question where question_id='$question'")->fetch_assoc(); 
+                                $categ=$categ['category'];                            
+                                $flag=true;
+                                foreach($graph as &$arr){
+                                    if($arr[0]==$categ){                                        
+                                        $flag=false;
+                                        if($correct) $arr[1]++;
+                                        $arr[2]++;                                        
+                                        break;
+                                    }
+                                }
+                                if($flag){
+                                    $res=0;
+                                    if($correct) $res=1;
+                                    $myarr=array($categ,$res,1);
+                                    array_push($graph,$myarr);
+                                }                                
+                            }                                                                                    
+                            foreach($graph as &$arr){   
+                                $result=$con->query("select * from category where id='".$arr[0]."' and status='0'")->fetch_assoc();                                                
+                                $percent=($arr[1]/$arr[2])*100;
+                                if($percent>=80) $decision="progress-bar-success";
+                                else if($percent>=60) $decision="progress-bar-info";                                
+                                else if($percent>=40) $decision="progress-bar-warning";
+                                else $decision="progress-bar-danger";
+                            ?>                                                                                     
+                                <div class="progress" style="height: fit-content; margin-top: 0px;">
+                                    <div class="progress-bar <?php echo $decision; ?>" role="progressbar"  style="width:<?php echo $percent; ?>%">
+                                        <?php echo $result['title']; ?>
+                                    </div>
+                                </div>                                                                                        
+                            <?php } ?>                                                                                    
+                            </div>
+                            <div class="col-md-4">
+                                <h5>Legend</h5>
+                                <small class="bg-success" style="border-radius: 10%; margin: 5px; padding: 5px;"></small>Excellent
+                                <small class="bg-info" style="border-radius: 10%; margin: 5px; padding: 5px;"></small>Good
+                                <small class="bg-warning" style="border-radius: 10%; margin: 5px; padding: 5px;"></small>Average
+                                <small class="bg-danger" style="border-radius: 10%; margin: 5px; padding: 5px;"></small>Low
+                            </div>
+                        </div><hr>
                         <?php 
                             $count=count($report);
                             for($i=0;$i<$count;$i++){

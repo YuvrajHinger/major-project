@@ -86,7 +86,7 @@
                                         <div class="col-md-12 form-group">
                                             <button type="submit" style="border-radius: 20px;" class="btn btn-success" name="question_submit">Submit</button>
                                             <button type="button" style="border-radius: 20px;" class="btn btn-primary" onclick="add_option('option_ans','option_content')">Add Option</button>                                            
-                                            <button type="reset" style="border-radius: 20px;" class="btn btn-default" value="reset">Reset</button>
+                                            <button type="reset" style="border-radius: 20px;" class="btn btn-default">Reset</button>
                                         </div>		
                                         <div class="clearfix"> </div>
                                     </div>
